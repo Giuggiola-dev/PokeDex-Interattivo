@@ -190,3 +190,7 @@ In questo caso, bisognerà digitare nel prompt dei comandi:
 ```
 python -m streamlit run app.py
 ```
+
+Alla prima esecuzione, la creazione del venv da parte di uv richiederà del tempo. Inoltre, Streamlit potrebbe chiedere di inserire la propria mail. Ciò può essere ignorato premendo Invio.
+
+Purtroppo, quando si interagisce con la pagina, Streamlit non la aggiorna sempre completamente, e alcuni grafici Altair appaiono vuoti. In realtà sono stati calcolati, basta passarci sopra con il cursore per farli apparire.
