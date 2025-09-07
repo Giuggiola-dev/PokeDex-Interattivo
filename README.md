@@ -60,7 +60,7 @@ Sono state aggiunte informazioni NON ottenibili tramite pre-processing:
 - Evolutionary Stage
 - Final Evolution
 
-Informazioni confrontate per sicurezza con quelle dell'applicazione [dataDex](https://datadex.talzz.com/)
+Informazioni confrontate per sicurezza con quelle dell'applicazione [dataDex](https://datadex.talzz.com/).
 
 ### Immagini
 
@@ -170,6 +170,7 @@ Come eseguire:
 
 Il progetto è un'applicazione web programmata in Python con Streamlit. 
 I grafici interattivi sono gestiti con Altair e il dataset è manipolato con Polars.
+Le immagini sono gestite con Pillow.
 
 Innanzitutto, è necessario clonare il repository per scaricare i file necessari.
 
