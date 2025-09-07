@@ -305,7 +305,7 @@ with st.container():
     selected_pokemons = st.multiselect(
     "Seleziona i Pokémon da confrontare:",
     options,
-    default=["Bulbasaur", "Charmander"],
+    default=["Bulbasaur", "Charmander", "Squirtle"],
     )
     #Creo un dataframe vuoto
     confronti = pl.DataFrame()
