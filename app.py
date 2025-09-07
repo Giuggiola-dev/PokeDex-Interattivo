@@ -800,7 +800,7 @@ with st.container():
 
 with st.container():
     #Si disegna un grafico molto simile al boxplot+jitter precedente
-    st.subheader("Distribuzione del Totale delle Statistiche per Numero di Tipi")
+    st.subheader("Distribuzione del Totale delle Statistiche per Numero di Tipi nel corso delle Generazioni")
     st.write("Si vuole studiare se i Pokémon con due tipi siano più potenti (in termini di Totale delle statistiche) dei Pokémon con un solo tipo.")
     st.write('Seleziona se includere queste classi di Pokémon nel grafico:')
     option_1 = st.checkbox('Leggendari', value=True, key="4th")
@@ -828,7 +828,7 @@ with st.container():
     layered=alt.layer(Boxplot,data=box_data.group_by("Generation", "Tipo", "BST", "Name").agg(pl.col("Tipo").count().alias(f"Tipo_Count")).sort("Generation")).properties(width=50, height=500).facet(
     column=alt.Column(
         'Generation:N',
-        title="Tipo",
+        title="Generazione",
         header=alt.Header(
             labelFontSize=14,
             titleFontSize=14,
@@ -957,7 +957,7 @@ with st.container():
     #Grafico a barre per la categoria selezionata
     bar_chart = alt.Chart(final_data.group_by("Type",processed_select).agg(pl.col(f"perc_{processed_select}").sum())).mark_bar().encode(
         y=alt.Y("Type:N", title="Tipo del Pokémon", axis=alt.Axis(labelAngle=0)),
-        x=alt.X(f"perc_{processed_select}:Q", stack="normalize", title= None),  # Asse Y: percentuale
+        x=alt.X(f"perc_{processed_select}:Q", stack="normalize", title= "Percentuale"),  # Asse Y: percentuale
         color=alt.Color(f"{processed_select}:N"),  #Colore in base alla categoria scelta dall'utente
         tooltip=alt.value(None)
     ).properties(
@@ -967,9 +967,11 @@ with st.container():
     #Disegna il grafico
     bar_chart
     #Commento
-    st.write("Dal grafico si può osservare che:  \n - ah!  \n - ah!  \n - ah!")
+    st.write("Dal grafico si può osservare che:  \n - i tipi Drago e Psico (seguiti da Acciaio e Lotta) hanno una maggiore percentuale di Pokémon Leggendari rispetto agli altri Tipi.  \n Invece il tipo Coleottero, assieme a Normale e Veleno, ha la minor frequenza di Pokémon Leggendari.  \n - La frequenza di Pokémon con due tipi non sembra essere correlata ai Tipi di Pokémon con Totale delle Statistiche più alto.  \n - il tipo Drago, Lotta, Acciaio e Psico hanno una maggior percentuale di Pokémon del tutto evoluti al loro interno.  \n Il tipo Erba, Veleno e Coleottero invece ne hanno la frequenza minore.")
 
 with st.container():
     st.header("Conclusioni")
-    st.write("Dall'analisi si può evincere come Stadio Evolutivo, Rarità, Mega-Evoluzione e Numero dei Tipi di un Pokémon siano direttamente correlate alla sua potenza (in termini di Somma delle statistiche).  \n La distribuzione dei Pokémon con influenza la")
-    st.write("Il Totale delle Statistiche sembra essere spiegato soltanto in parte dal Tipo di un Pokémon. In alcuni casi, come i tipo Psico e Drago, sono alti perché correlati a Pokémon Leggendari, ma in altri come il Ghiaccio, non ci sono relazioni con altre variabili che sembrino giustificare il diverso andamento del Totale delle statistiche.")
+    st.write("Dall'analisi si può evincere come Stadio Evolutivo, Mega-Evoluzione e Rarità di un Pokémon siano direttamente correlate alla sua potenza (in termini di Somma delle statistiche).")
+    st.write("Altre variabili, che sembrano essere correlate al totale delle Statistiche, appaiono tali poiché sono correlate alle tre variabili sopracitate.  \n È il caso del Numero di Tipi di un Pokémon: i Pokémon con doppio tipo sono più potenti di quelli con un tipo solo perché il Doppio Tipo ha una frequenza che cresce con lo stadio evolutivo dei Pokémon, risultando maggiore tra i Pokémon del tutto evoluti.")
+    st.write("Per quanto riguarda il Tipo di un Pokémon, il Totale delle Statistiche sembra essere spiegato soltanto in parte da questa variabile.  \n In alcuni casi, come i tipi Drago, Psico, Acciaio e Lotta, il Totale delle statistiche tende ad essere più alto degli altri tipi perché questi sono correlati alla frequenza di Pokémon Leggendari e alla frequenza di Pokémon del tutto evoluti al loro interno.  \n Ma in altri casi, come il tipo Ghiaccio, non ci sono relazioni con altre variabili che sembrino giustificare il diverso andamento del Totale delle statistiche.")
+    st.write("Si può dunque affermare che il Totale delle statistiche è maggiormente influenzato da Stadio Evolutivo, Mega-Evoluzione e Rarità, e solo in minor parte dal Tipo di un Pokémon.")
