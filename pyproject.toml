@@ -1,0 +1,12 @@
+[project]
+name = "definitivo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "altair>=5.5.0",
+    "pillow>=11.3.0",
+    "polars>=1.33.0",
+    "streamlit>=1.49.1",
+]
