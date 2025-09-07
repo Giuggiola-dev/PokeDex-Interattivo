@@ -301,6 +301,7 @@ with st.container():
 
     #si  disegna un grafico analogo al precedente, ma confrontando più pokemon
     st.subheader("Confronto della rilevanza tra più Pokémon")
+    st.write("Il grafico a seguire permette di confrontare l'evoluzione del Percentile tra più Pokémon selezionati dall'utente.")
     #si selezionano le unità dal multiselect
     selected_pokemons = st.multiselect(
     "Seleziona i Pokémon da confrontare:",
@@ -474,6 +475,8 @@ with st.container():
     st.header("Analisi")
     st.subheader("Totale statistiche spiegato da Stadio evolutivo, Rarità e Mega-Evoluzione")
     st.write("Si vuole studiare se è presente una relazione tra il Totale delle statistiche (misura della potenza di un Pokémon), lo Stadio evolutivo (il Pokémon è l'evoluzione finale della propria linea? È la prima, la seconda o la terza evoluzione?), la Rarità (il Pokémon è Leggendario o no?) e Mega-Evoluzione (il Pokémon è una Mega Evoluzione?).")
+    st.write("Per studiare la correlazione tra le variabili verrà impiegato un Grafico di dispersione. In ascissa si pone lo Stadio evolutivo (chi si teorizza essere la variabile esplicativa) e in ordinata si pone il Totale delle statistiche (la variabile risposta).")
+    st.write("Ogni punto ha una codifica del colore e della forma:  \n – il colore del contorno indica se un Pokémon è un'evoluzione finale o meno  \n – il colore dell'area indica se un Poémon è una Mega Evoluzione o no  \n – la forma del punto  indica se un Pokémon è Leggendario o no")
     #L'utente seleziona la Generazione da analizzare. I dati verranno filtrati per quella generazione
     selected_gen = st.slider("Seleziona la Generazione da analizzare:", 1,8,1, key=2)
     subdata=data.filter(pl.col("Generation")==selected_gen)
@@ -514,6 +517,8 @@ with st.container():
     #Grafico analogo al precedente, ma anziché avere BST sull'asse Y ora c'è Catch Rate
     st.subheader("Tasso di cattura e Stadio evolutivo")
     st.write("Si vuole studiare se è presente una relazione tra il Tasso di cattura (misura di quanto facile da catturare è un Pokémon), lo Stadio evolutivo (il Pokémon è l'evoluzione finale della propria linea? È la prima, la seconda o la terza evoluzione?), la Rarità (il Pokémon è Leggendario o no?) e Mega-Evoluzione (il Pokémon è una Mega Evoluzione?).")
+    st.write("Per studiare la correlazione tra le variabili verrà impiegato un Grafico di dispersione analogo al precedente. In ascissa si pone lo Stadio evolutivo e in ordinata si pone il Tasso di Cattura.")
+    st.write("Ogni punto ha la stessa codifica del grafico precedente:  \n – il colore del contorno indica se un Pokémon è un'evoluzione finale o meno  \n – il colore dell'area indica se un Poémon è una Mega Evoluzione o no  \n – la forma del punto  indica se un Pokémon è Leggendario o no")
     selected_gen = st.slider("Seleziona la Generazione da analizzare:", 1,8,1, key=3)
     subdata=data.filter(pl.col("Generation")==selected_gen)
     alt.themes.enable('my_category_theme')
@@ -550,6 +555,7 @@ with st.container():
 with st.container():
     st.subheader("Numero di nuovi Pokémon introdotti per Generazione")
     #Segue un grafico a barre che mostra quanti Pokémon sono stati introdotti in ogni generazione. Si evidenziano tre categorie "speciali": Keggendari, MegaEvoluzioni, del tutto evoluti.
+    st.write("Per mostrare il conteggio di Pokémon introdotti in ogni Generazione si utilizza un grafico a barre.  \n Ogni barra è divisa in due partizioni in base alla categoria che l'utente desidera evidenziare (Pokémon Leggendari, Mega Evoluzioni o Pokémon alla fase evolutiva finale).  \n Sopra ogni barra viene indicato il conteggio di nuovi Pokémon introdotti nella generazione, mentre il conteggio di unità per ogni sotto-barra è indicato al suo interno.")
     selection=st.selectbox(
     "Seleziona quale classe di Pokémon evidenziare:",
     ["Leggendari", "Mega Evoluzioni", "Pokémon alla fase evolutiva finale"], index=0)
@@ -600,6 +606,7 @@ with st.container():
     #Per gestire, sull'asse X, sia jitter che generazione, si sono affiancati più grafici grazie al metodo column di altair.
     st.subheader("Distribuzione del Totale delle Statistiche nel corso delle Generazioni")
     st.write("Si vuole studiare se i Pokémon introdotti nelle Generazioni più recenti sono più potenti (in termini di Totale delle statistiche) dei Pokémon delle generazioni precedenti.")
+    st.write("Per studiare la distribuzione del Totale delle statistiche si impiegheranno dei diagrammi a scatola con baffi, rappresentazioni grafiche utilizzate per descrivere la distribuzione di un campione tramite semplici indici di posizione (il limite della scatola è dato dal primo e terzo quartile, e al suo interno viene indicata la mediana).  \n Si affiancheranno le scatole con baffi per ogni Generazione in modo da studiare l'evoluzione della distribuzione del Totale delle statistiche.")
     st.write('Seleziona se includere queste classi di Pokémon nel grafico:')
     option_1 = st.checkbox('Leggendari', value=False)
     option_2 = st.checkbox('Mega Evoluzioni', value=False)
@@ -716,6 +723,7 @@ with st.container():
 
 with st.container():
     st.subheader("Distribuzione del Numero di Tipi per Generazione e per Stadio Evolutivo")
+    st.write("Per mostrare il conteggio di Pokémon con un Tipo o due Tipi introdotti in ogni Generazione si utilizza un grafico con barre affiancate per facilitarne il confronto.  \n Sopra ogni barra viene indicato il conteggio di nuovi Pokémon introdotti in quella Generazione.")
     #Si vuole disegnare un grafico a barre che conti, per generazione, quanti pokémon con uno o due tipi sono stati introdotti.
     #Si crea una colonna "Tipo" che classifica i pokémon in Monotipo o Doppio tipo (in base ai valori di Type 2), poi si raggruppa per generazione e "Tipo"  e si aggiunge la colonna conteggio
     bar_data=data.with_columns(
@@ -747,7 +755,8 @@ with st.container():
     #Disegno il grafico
     layered
     #Commento
-    st.write("Il rapporto tra i Pokémon Monotipo o con Doppio Tipo è pressoché costante in ogni Generazione, tranne che nella sesta e nella settima.  \n   \n  .")
+    st.write("Il rapporto tra i Pokémon Monotipo o con Doppio Tipo è pressoché costante in ogni Generazione, tranne che nella sesta e nella settima.")
+    st.write("Il grafico a barre affiancate sottostante mostra il conteggio di Pokémon con un Tipo o due Tipi per Stadio Evolutivo del Pokémon. Ogni barra è partizionata per mostrare quanti Pokémon sono totalmente evoluti all'interno di quello Stadio Evolutivo. Vengono indicati i conteggi di ogni partizione.")
 
     col1, col2= st.columns([3,1])
     with col1:
@@ -802,6 +811,7 @@ with st.container():
     #Si disegna un grafico molto simile al boxplot+jitter precedente
     st.subheader("Distribuzione del Totale delle Statistiche per Numero di Tipi nel corso delle Generazioni")
     st.write("Si vuole studiare se i Pokémon con due tipi siano più potenti (in termini di Totale delle statistiche) dei Pokémon con un solo tipo.")
+    st.write("Per confrontare la distribuzione del Totale delle statistiche per Numero di Tipi di un Pokémon si impiegheranno dei diagrammi a scatola con baffi affiancati. Si rappresentano le coppie di scatole con baffi per ogni Generazione in modo da osservare come varia la distribuzione nel corso delle Generazioni.")
     st.write('Seleziona se includere queste classi di Pokémon nel grafico:')
     option_1 = st.checkbox('Leggendari', value=True, key="4th")
     option_2 = st.checkbox('Mega Evoluzioni', value=True, key="5th")
@@ -849,6 +859,7 @@ with st.container():
     #Boxplot con punti "jitterati"
     st.subheader("Distribuzione del Totale delle Statistiche per Tipo")
     st.write('Si vuole studiare se è presente una relazione tra il Tipo di un Pokémon e il Totale delle statistiche.')
+    st.write("Per studiare la distribuzione del Totale delle statistiche in base al Tipo di un Pokémon si impiegheranno dei diagrammi a scatola con baffi.")
     st.write('Seleziona se includere queste classi di Pokémon nel grafico:')
     option_1 = st.checkbox('Leggendari', value=False, key="2nd")
     option_2 = st.checkbox('Mega Evoluzioni', value=False, key="3rd")
@@ -919,6 +930,7 @@ with st.container():
 with st.container():
     st.subheader("Distribuzione del Numero di Tipi, Evoluzioni Finali e Leggendari per ogni Tipo")
     st.write('Si vuole studiare se alcuni tipi presentano una frequenza maggiore di alcune categorie (Pokémon con due Tipi, Evoluzioni Finali e Leggendari) che influenzano il Totale delle statistiche.')
+    st.write("Per studiare la frequenza delle suddette categorie per ogni Tipo si utilizza un grafico a barre orizzontali normalizzato. Ogni barra è partizionata in base alla categoria (dicotomica) scelta dall'utente. La lunghezza di ogni sotto-barra rappresenta la percentuale di osservazioni di quella categoria rispetto al totale per Tipo. Per ogni tipo, la barra rappresenta il 100% delle osservazioni.")
     selection=st.selectbox(
     "Seleziona di quale classe di Pokémon calcolare la percentuale per ogni Tipo:",
     ["Leggendari", "Pokémon con due Tipi", "Pokémon alla fase evolutiva finale"], index=0)
