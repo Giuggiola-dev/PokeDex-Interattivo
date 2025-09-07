@@ -606,7 +606,7 @@ with st.container():
     #Per gestire, sull'asse X, sia jitter che generazione, si sono affiancati più grafici grazie al metodo column di altair.
     st.subheader("Distribuzione del Totale delle Statistiche nel corso delle Generazioni")
     st.write("Si vuole studiare se i Pokémon introdotti nelle Generazioni più recenti sono più potenti (in termini di Totale delle statistiche) dei Pokémon delle generazioni precedenti.")
-    st.write("Per studiare la distribuzione del Totale delle statistiche si impiegheranno dei diagrammi a scatola con baffi, rappresentazioni grafiche utilizzate per descrivere la distribuzione di un campione tramite semplici indici di posizione (il limite della scatola è dato dal primo e terzo quartile, e al suo interno viene indicata la mediana).  \n Si affiancheranno le scatole con baffi per ogni Generazione in modo da studiare l'evoluzione della distribuzione del Totale delle statistiche.")
+    st.write("Per studiare la distribuzione del Totale delle statistiche si impiegheranno dei diagrammi a scatola con baffi, rappresentazioni grafiche utilizzate per descrivere la distribuzione di un campione tramite semplici indici di posizione (i limiti della scatola sono dati dal primo e dal terzo quartile, mentre al suo interno viene indicata la mediana).  \n Si affiancheranno le scatole con baffi per ogni Generazione in modo da studiare l'evoluzione della distribuzione del Totale delle statistiche.")
     st.write('Seleziona se includere queste classi di Pokémon nel grafico:')
     option_1 = st.checkbox('Leggendari', value=False)
     option_2 = st.checkbox('Mega Evoluzioni', value=False)
